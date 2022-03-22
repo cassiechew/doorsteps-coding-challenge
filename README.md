@@ -87,3 +87,8 @@ Types will be defined as:
 - single
 - multi
 - list
+
+## Additional features
+
+- Adding a home page listing experiments
+- Experiment adding/editing page
