@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  api:
+    restart: always
+    build:
+      dockerfile: dockerfile.dev
+      context: ./api
+    volumes:
+      - ./api:/api
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+  client:
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: dockerfile.dev
+    volumes:
+      - ./frontend:/frontend

@@ -1,0 +1,32 @@
+# pull the Node.js Docker image
+FROM node:16
+
+# create the directory inside the container
+# WORKDIR /api
+
+# # # RUN apk add openssl libc6-compat
+
+# # # copy the package.json files from local machine to the workdir in container
+# COPY package*.json ./
+
+# COPY yarn.lock ./
+
+# COPY prisma/ ./
+
+# COPY src/ ./
+
+COPY tsconfig.json ./
+
+# # run npm install in our local machine
+RUN yarn
+
+RUN yarn prisma generate
+
+# # copy the generated modules and all other files to the container
+# COPY . .
+
+# our app is running on port 5000 within the container, so need to expose it
+EXPOSE 5000
+
+# the command that starts our app
+CMD ["yarn", "start:dev"]
