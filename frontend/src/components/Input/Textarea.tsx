@@ -22,11 +22,6 @@ export const Textarea = ({
     <>
       <FormLabel htmlFor={htmlFor}>{labelText}</FormLabel>
       <ChakraTextarea name={fieldName.toLowerCase()} placeholder={fieldName} mb={'20px'} onChange={onChange} />
-      {!isError ? (
-        <FormHelperText>{helperText}</FormHelperText>
-      ) : (
-        <FormErrorMessage>Email is required.</FormErrorMessage>
-      )}
     </>
   );
 };

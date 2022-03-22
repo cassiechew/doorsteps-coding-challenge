@@ -6,11 +6,4 @@ import { Message } from './entities/app.entity';
 @Resolver(() => Message)
 export class AppResolver {
   constructor(private readonly appService: AppService) {}
-
-  // @Query(() => Message, { name: 'Hi' })
-  // getHello(): Message {
-  //   return {
-  //     msg: 'hi',
-  //   };
-  // }
 }

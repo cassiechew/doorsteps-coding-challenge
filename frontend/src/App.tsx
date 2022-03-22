@@ -17,7 +17,7 @@ const App = () => {
     <Provider value={client}>
       <ChakraProvider>
         <Routes>
-          <Route path='thanks' element={<ThankyouPage />} />
+          <Route path='/thanks' element={<ThankyouPage />} />
           <Route path='/:name' element={<MasterForm />} />
         </Routes>
       </ChakraProvider>

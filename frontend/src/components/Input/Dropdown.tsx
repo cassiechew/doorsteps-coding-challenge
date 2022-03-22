@@ -30,11 +30,6 @@ export const Dropdown = ({
           </option>
         ))}
       </ChakraSelect>
-      {!isError ? (
-        <FormHelperText>{helperText}</FormHelperText>
-      ) : (
-        <FormErrorMessage>Email is required.</FormErrorMessage>
-      )}
     </>
   );
 };

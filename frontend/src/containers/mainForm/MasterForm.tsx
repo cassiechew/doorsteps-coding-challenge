@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {useQuery} from 'urql';
+import {useMutation, useQuery} from 'urql';
 
 import {Box, Container, FormControl, Input} from '@chakra-ui/react';
 
 import components from '../../components';
+import {useNavigate} from 'react-router-dom';
 
 const formName = window.location.pathname.slice(1);
 const ExperimentQuery = `
@@ -14,18 +15,30 @@ const ExperimentQuery = `
   }
 `;
 
+const FormResponseMutation = `
+  mutation ($name: String!, $email: String!, $experimentData: String!, $phone: String!) {
+    createFormResponse(createFormResponseInput: {name: $name, email: $email, experimentData: $experimentData, phone: $phone}) {
+      name
+      email
+      experimentData
+      phone
+    }
+  }
+`;
+
 const MasterForm = () => {
+  const [FormRespResult, updateForm] = useMutation(FormResponseMutation);
   const [inputFields, setInputFields] = useState(
     new Map<string, string>([
       ['name', ''],
       ['email', ''],
-      ['phoneNumber', ''],
+      ['phone', ''],
     ]),
   );
-
   const [result, reexecuteQuery] = useQuery({
     query: ExperimentQuery,
   });
+  const navigate = useNavigate();
 
   const {data, fetching, error} = result;
 
@@ -91,12 +104,28 @@ const MasterForm = () => {
   ) => {
     const data = inputFields;
     data.set(e.target.name, e.target.value);
-    console.log(data);
     setInputFields(data);
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    const TempMap = new Map<string, string>();
+    inputFields.forEach((v, k) => {
+      if (k === 'name' || k === 'email' || k === 'phone') {
+        return;
+      }
+
+      TempMap.set(k, v);
+    });
+    const dataToSend = new Map<string, string>([
+      ['name', inputFields.get('name') || ''],
+      ['email', inputFields.get('email') || ''],
+      ['phone', inputFields.get('phone') || ''],
+      ['experimentData', JSON.stringify(Object.fromEntries(TempMap))],
+    ]);
+
+    updateForm(Object.fromEntries(dataToSend)).then(() => {
+      navigate('/thanks');
+    });
   };
 
   return (
@@ -127,17 +156,18 @@ const MasterForm = () => {
         </FormControl>
         <FormControl>
           <components.Input
-            fieldName='Phone Number'
-            htmlFor='phonenumber'
-            labelText='Phone Number'
+            fieldName='Phone'
+            type='number'
+            htmlFor='phone'
+            labelText='Phone'
             helperText='We need a valid phone number to contact you!'
-            input={inputFields.get('phoneNumber') || ''}
+            input={inputFields.get('phone') || ''}
             onChange={(e) => handleFormChange(e)}
           />
         </FormControl>
         {arr}
         <FormControl>
-          <Input type={'submit'} value={'Submit'} onClick={(e) => handleSubmit(e)} />
+          <Input mb={'20px'} type={'submit'} value={'Submit'} onClick={() => handleSubmit()} />
         </FormControl>
       </Container>
     </Box>
