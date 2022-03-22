@@ -10,7 +10,7 @@ COPY package*.json ./
 COPY yarn.lock ./
 
 # run npm install in our local machine
-RUN yarn
+RUN yarn && yarn global add serve
 
 # copy the generated modules and all other files to the container
 COPY . .
@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 3000
 
 # the command that starts our app
-CMD ["yarn", "start"]
+CMD ["serve", "-s", "build"]

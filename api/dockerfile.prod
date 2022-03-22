@@ -1,18 +1,19 @@
 # pull the Node.js Docker image
-FROM node:alpine
+FROM node:16
 
 # create the directory inside the container
 WORKDIR /usr/src/app
 
 # copy the package.json files from local machine to the workdir in container
 COPY package*.json ./
-
 COPY yarn.lock ./
-
 COPY prisma/ ./
+COPY tsconfig.build.json ./
+COPY tsconfig.json ./
 
 # run npm install in our local machine
-RUN yarn && yarn build && yarn prisma generate
+RUN yarn && yarn build
+RUN yarn prisma generate
 
 # copy the generated modules and all other files to the container
 COPY . .
