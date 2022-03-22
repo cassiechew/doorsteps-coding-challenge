@@ -14,6 +14,8 @@ make dev
 
 ### Installing
 
+#### API
+
 If this fails to work or you would like to install the files run.
 
 ```
@@ -32,7 +34,9 @@ and
 yarn prisma generate
 ```
 
-Then go into the frontend folder from the project folder and run
+#### Frontend
+
+Go into the frontend folder from the project folder and run
 
 ```
 yarn
