@@ -1,6 +1,7 @@
 # doorsteps-coding-challenge
 
 This is a response to the Doorsteps coding challenge.
+Built with NestJS, GraphQL, React, Typescript, Urql, ChakraUI.
 
 ## How to run
 
