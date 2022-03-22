@@ -70,3 +70,9 @@ The assumption is in regards to the `customFields` field. I have assumed that it
   }
 ]
 ```
+
+Types will be defined as:
+
+- single
+- multi
+- list
