@@ -7,6 +7,8 @@ import components from '../../components';
 import {useNavigate} from 'react-router-dom';
 
 const formName = window.location.pathname.slice(1);
+
+// Graphql query definitions.
 const ExperimentQuery = `
   query {
     experiment(name: "${formName}") {
@@ -27,7 +29,7 @@ const FormResponseMutation = `
 `;
 
 const MasterForm = () => {
-  const [FormRespResult, updateForm] = useMutation(FormResponseMutation);
+  // Input data map
   const [inputFields, setInputFields] = useState(
     new Map<string, string>([
       ['name', ''],
@@ -35,9 +37,14 @@ const MasterForm = () => {
       ['phone', ''],
     ]),
   );
+
+  // Urql graphQL hooks
   const [result, reexecuteQuery] = useQuery({
     query: ExperimentQuery,
   });
+  const [FormRespResult, updateForm] = useMutation(FormResponseMutation);
+
+  // Hook to let us navigate
   const navigate = useNavigate();
 
   const {data, fetching, error} = result;
@@ -50,6 +57,7 @@ const MasterForm = () => {
 
   const arr: JSX.Element[] = [];
 
+  // Mapping function to generate components from experiment data
   JSON.parse(data.experiment.customFields).map((jsonFields: {name: string; type: string; options?: string[]}) => {
     switch (jsonFields.type) {
       case 'single':

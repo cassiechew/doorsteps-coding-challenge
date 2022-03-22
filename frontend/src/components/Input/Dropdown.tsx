@@ -1,25 +1,21 @@
-import {FormErrorMessage, FormHelperText, FormLabel, Select as ChakraSelect} from '@chakra-ui/react';
+import {FormLabel, Select as ChakraSelect} from '@chakra-ui/react';
 import React, {ChangeEventHandler} from 'react';
 
+// Dropdown Input type
 export const Dropdown = ({
   fieldName,
   htmlFor,
   labelText,
-  helperText,
-  input,
   onChange,
   options,
 }: {
   fieldName: string;
   htmlFor: string;
   labelText: string;
-  helperText?: string;
   input: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
   options: string[];
 }) => {
-  const isError = input === '';
-
   return (
     <>
       <FormLabel htmlFor={htmlFor}>{labelText}</FormLabel>

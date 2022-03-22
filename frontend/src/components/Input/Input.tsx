@@ -1,13 +1,12 @@
-import {FormErrorMessage, FormHelperText, FormLabel, Input as ChakraInput} from '@chakra-ui/react';
+import {FormLabel, Input as ChakraInput} from '@chakra-ui/react';
 import React, {ChangeEventHandler} from 'react';
 
+// Input for single line input
 export const Input = ({
   fieldName,
   type,
   htmlFor,
   labelText,
-  helperText,
-  input,
   onChange,
 }: {
   fieldName: string;
@@ -18,8 +17,6 @@ export const Input = ({
   input: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }) => {
-  const isError = input === '';
-
   return (
     <>
       <FormLabel htmlFor={htmlFor}>{labelText}</FormLabel>

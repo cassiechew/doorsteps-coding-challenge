@@ -1,12 +1,11 @@
-import {FormErrorMessage, FormHelperText, FormLabel, Textarea as ChakraTextarea} from '@chakra-ui/react';
+import {FormLabel, Textarea as ChakraTextarea} from '@chakra-ui/react';
 import React, {ChangeEventHandler} from 'react';
 
+// Textarea type input
 export const Textarea = ({
   fieldName,
   htmlFor,
   labelText,
-  helperText,
-  input,
   onChange,
 }: {
   fieldName: string;
@@ -16,8 +15,6 @@ export const Textarea = ({
   input: string;
   onChange: ChangeEventHandler<HTMLTextAreaElement>;
 }) => {
-  const isError = input === '';
-
   return (
     <>
       <FormLabel htmlFor={htmlFor}>{labelText}</FormLabel>
