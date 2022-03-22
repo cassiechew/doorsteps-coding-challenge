@@ -20,6 +20,18 @@ Otherwise the 'prod' environment can be made with
 make prod
 ```
 
+Either environments can be built with
+
+Dev
+```
+make build
+```
+
+Prod
+```
+make build-prod
+```
+
 ### Installing
 
 #### API
