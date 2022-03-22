@@ -48,5 +48,25 @@ make dev
 
 in the root project folder.
 
-Please include a README that describes how to run your app, as well as any assumptions
-you have made.
+## Assumptions
+
+The *MAIN* assumption that I have made is in regards to how you call the adding experiment endpoint. I have designed the endpoints in GraphQL and they have been built with this structure.
+
+```graphql
+{
+  active:         boolean,
+  experimentName: string,
+  customFields:   string
+}
+```
+
+The assumption is in regards to the `customFields` field. I have assumed that it is a stringified array of objects. Eg.
+
+```json
+[
+  {
+    "name": "name-of-field",
+    "type": "type of field"
+  }
+]
+```
