@@ -12,6 +12,14 @@ Start the dev docker environment with
 make dev
 ```
 
+This will allow hot code reloading.
+
+Otherwise the 'prod' environment can be made with
+
+```
+make prod
+```
+
 ### Installing
 
 #### API
