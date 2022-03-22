@@ -37,22 +37,58 @@ const MasterForm = () => {
 
   const arr: JSX.Element[] = [];
 
-  JSON.parse(data.experiment.customFields).map((jsonFields: {name: string; type: string}) => {
-    arr.push(
-      <FormControl key={jsonFields.name}>
-        <components.Input
-          fieldName={jsonFields.name}
-          type={jsonFields.type}
-          htmlFor={jsonFields.name}
-          labelText={jsonFields.name}
-          input={inputFields.get(jsonFields.name) || ''}
-          onChange={(e) => handleFormChange(e)}
-        />
-      </FormControl>,
-    );
+  JSON.parse(data.experiment.customFields).map((jsonFields: {name: string; type: string; options?: string[]}) => {
+    switch (jsonFields.type) {
+      case 'single':
+        arr.push(
+          <FormControl key={jsonFields.name}>
+            <components.Input
+              fieldName={jsonFields.name}
+              type={jsonFields.type}
+              htmlFor={jsonFields.name}
+              labelText={jsonFields.name}
+              input={inputFields.get(jsonFields.name) || ''}
+              onChange={(e) => handleFormChange(e)}
+            />
+          </FormControl>,
+        );
+        break;
+      case 'multi':
+        arr.push(
+          <FormControl key={jsonFields.name}>
+            <components.Textarea
+              fieldName={jsonFields.name}
+              htmlFor={jsonFields.name}
+              labelText={jsonFields.name}
+              input={inputFields.get(jsonFields.name) || ''}
+              onChange={(e) => handleFormChange(e)}
+            />
+          </FormControl>,
+        );
+        break;
+      case 'list':
+        if (jsonFields.options === undefined) break;
+        arr.push(
+          <FormControl key={jsonFields.name}>
+            <components.Dropdown
+              fieldName={jsonFields.name}
+              htmlFor={jsonFields.name}
+              labelText={jsonFields.name}
+              input={inputFields.get(jsonFields.name) || ''}
+              onChange={(e) => handleFormChange(e)}
+              options={jsonFields.options}
+            />
+          </FormControl>,
+        );
+    }
   });
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     const data = inputFields;
     data.set(e.target.name, e.target.value);
     console.log(data);

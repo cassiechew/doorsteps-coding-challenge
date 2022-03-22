@@ -65,11 +65,22 @@ The assumption is in regards to the `customFields` field. I have assumed that it
 ```json
 [
   {
-    "name": "name-of-field",
-    "type": "type of field"
+    "name": "field1",
+    "type": "single"
+  },
+  {
+    "name": "field2",
+    "type": "multi"
+  },
+  {
+    "name": "field3",
+    "type": "list",
+    "options": ["option1", "option2"]
   }
 ]
 ```
+
+I will assume that the options in the list are strings.
 
 Types will be defined as:
 

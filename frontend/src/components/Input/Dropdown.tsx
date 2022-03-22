@@ -1,27 +1,35 @@
-import {FormErrorMessage, FormHelperText, FormLabel, Textarea as ChakraTextarea} from '@chakra-ui/react';
+import {FormErrorMessage, FormHelperText, FormLabel, Select as ChakraSelect} from '@chakra-ui/react';
 import React, {ChangeEventHandler} from 'react';
 
-export const Textarea = ({
+export const Dropdown = ({
   fieldName,
   htmlFor,
   labelText,
   helperText,
   input,
   onChange,
+  options,
 }: {
   fieldName: string;
   htmlFor: string;
   labelText: string;
   helperText?: string;
   input: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  onChange: ChangeEventHandler<HTMLSelectElement>;
+  options: string[];
 }) => {
   const isError = input === '';
 
   return (
     <>
       <FormLabel htmlFor={htmlFor}>{labelText}</FormLabel>
-      <ChakraTextarea name={fieldName.toLowerCase()} placeholder={fieldName} mb={'20px'} onChange={onChange} />
+      <ChakraSelect name={fieldName.toLowerCase()} mb={'20px'} onChange={onChange}>
+        {options.map((opt: string) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </ChakraSelect>
       {!isError ? (
         <FormHelperText>{helperText}</FormHelperText>
       ) : (
