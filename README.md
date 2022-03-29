@@ -105,6 +105,23 @@ The assumption is in regards to the `customFields` field. I have assumed that it
 ]
 ```
 
+The way the data is being held in the database is, 
+
+```json
+{
+  "active": boolean,
+  "experimentName": string,
+  "customFields": [
+    {
+      "name": string,
+      "type": string
+    }...
+  ]
+}
+```
+
+I have provided an endpoint to add experiments. This can be accessed using the graphql playground [here](http://localhost/api/graphql).
+
 I will assume that the options in the list are strings.
 
 Types will be defined as:
