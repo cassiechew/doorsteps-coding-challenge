@@ -2,20 +2,17 @@
 FROM node:16
 
 # create the directory inside the container
-# WORKDIR /api
+WORKDIR /api
 
 # # # RUN apk add openssl libc6-compat
 
 # # # copy the package.json files from local machine to the workdir in container
 COPY package*.json ./
-
 COPY yarn.lock ./
-
 COPY prisma/ ./
-
 COPY src/ ./
-
 COPY tsconfig.json ./
+COPY tsconfig.build.json ./
 
 # # run npm install in our local machine
 RUN yarn

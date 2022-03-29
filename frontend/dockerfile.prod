@@ -9,6 +9,12 @@ COPY package*.json ./
 
 COPY yarn.lock ./
 
+COPY tsconfig.json ./
+
+COPY src/ ./
+
+COPY public/ ./
+
 # run npm install in our local machine
 RUN yarn && yarn global add serve
 
