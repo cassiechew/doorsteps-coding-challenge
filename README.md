@@ -122,6 +122,22 @@ The way the data is being held in the database is,
 
 I have provided an endpoint to add experiments. This can be accessed using the graphql playground [here](http://localhost/api/graphql).
 
+The mutation for creating an experiment is:
+
+```graphql
+mutation {
+  createExperiment(createExperimentInput: {
+    active: true,
+    customFields: "[{\"name\": \"something\", \"type\": \"single\"}]",
+    experimentName: "someName"
+  }) {
+    active
+  }
+}
+```
+
+I have also provided an existing form available at the test route as http://localhost/test
+
 I will assume that the options in the list are strings.
 
 Types will be defined as:
