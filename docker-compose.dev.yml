@@ -12,7 +12,7 @@ services:
   client:
     restart: always
     build:
-      context: ./frontend
       dockerfile: dockerfile.dev
+      context: ./frontend
     volumes:
       - ./frontend:/frontend
