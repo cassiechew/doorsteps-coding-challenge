@@ -12,7 +12,7 @@ COPY src/ ./
 COPY public/ ./
 
 # # run npm install in our local machine
-RUN yarn install
+RUN yarn
 
 # # copy the generated modules and all other files to the container
 COPY . .

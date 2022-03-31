@@ -1,6 +1,8 @@
 
+install:
+	cd frontend/ && yarn && cd ../api/ && yarn && yarn prisma generate
 
-dev: 
+dev: install
 	docker compose -f docker-compose.yml -f docker-compose.dev.yml up --remove-orphans --build
 
 build: 
@@ -11,6 +13,3 @@ build-prod:
 
 prod: 
 	docker compose -f docker-compose.yml -f docker-compose.prod.yml up --remove-orphans --build
-
-install:
-	cd frontend/ && yarn && cd ../api/ && yarn && yarn prisma generate
